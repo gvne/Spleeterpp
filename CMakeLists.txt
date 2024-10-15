@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.28.1)
 
 project(spleeter++)
 
 set(CMAKE_CXX_STANDARD 14)
 
 option(spleeter_enable_tests "Enable unit tests" ON)
+option(spleeter_download_models "Download the models from the spleeter repository" ON)
 option(spleeter_regenerate_models "Build the models from deezer/spleeter repository (requires conda)" OFF)
 option(spleeter_enable_filter "Enable the filter interface (for online processing)" ON)
 option(spleeter_enable_high_resolution "Process the spectrum up the 16KHz" OFF)
@@ -36,7 +37,9 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 if (${spleeter_regenerate_models})
   include(add_spleeter)
 else()
-  include(add_spleeter_models)
+  if(${spleeter_download_models})
+    include(add_spleeter_models)
+  endif()
 endif()
 include(add_eigen)
 include(add_tensorflow)

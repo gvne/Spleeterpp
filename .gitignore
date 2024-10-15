@@ -1,2 +1,6 @@
 build
 docs/build
+
+# Ignore CLion files
+cmake-build-debug
+.idea
