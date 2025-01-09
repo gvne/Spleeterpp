@@ -4,7 +4,9 @@
 #include <vector>
 #include <complex>
 
-
+#ifdef __linux__
+#include <cstdint>
+#endif
 
 namespace artff {
 class CircularFrameBuffer {
